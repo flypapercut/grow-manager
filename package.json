@@ -1,15 +1,16 @@
 {
-  "name": "grow-manager",
-  "version": "1.0.0",
-  "description": "a simples manager for your growing needs",
-  "license": "ISC",
-  "author": "flypapercut",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
-  }
+	"name": "grow-manager",
+	"version": "1.0.0",
+	"description": "a simple manager for your growing needs",
+	"license": "ISC",
+	"author": "flypapercut",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "node --watch src/server.ts"
+	},
+	"dependencies": {
+		"express": "^5.1.0"
+	}
 }
