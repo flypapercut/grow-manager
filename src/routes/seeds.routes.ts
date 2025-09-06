@@ -1,11 +1,11 @@
 import { Router } from "express";
+import { SeedsController } from "../controllers/seeds.controller";
 
 const seedsRoutes = Router();
 
-seedsRoutes.get("/", (req, res) => {
-	console.log("listing all seeds");
-	return res.send("ok");
-});
+const seedsController = new SeedsController();
+
+seedsRoutes.get("/", seedsController.index);
 seedsRoutes.get("/:id", (req, res) => console.log("seed"));
 seedsRoutes.post("/", (req, res) => {
 	console.log("creating seed");
