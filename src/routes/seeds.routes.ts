@@ -8,7 +8,7 @@ const seedsController = new SeedsController();
 seedsRoutes.get("/", seedsController.index);
 seedsRoutes.get("/:id", seedsController.indexById);
 seedsRoutes.post("/", seedsController.create);
-seedsRoutes.put("/:id", () => console.log("updating seed: "));
+seedsRoutes.put("/:id", seedsController.update);
 seedsRoutes.delete("/:id", () => console.log("deleting seed: "));
 
 export { seedsRoutes };

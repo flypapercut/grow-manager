@@ -49,6 +49,29 @@ class SeedsController {
 			next(error);
 		}
 	}
+
+	async update(request: Request, response: Response, next: NextFunction) {
+		try {
+			console.log("updating seed");
+			const id = request.params.id;
+			const { name, mother_id, father_id, collected_date, events } =
+				seedSchema.parse(request.body);
+
+			await knex<Seed>("seeds")
+				.update({
+					mother_id,
+					father_id,
+					collected_date,
+					name,
+					events,
+					updated_at: knex.fn.now(),
+				})
+				.where("id", id);
+			return response.status(200).json();
+		} catch (error) {
+			next(error);
+		}
+	}
 }
 
 export { SeedsController };
