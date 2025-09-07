@@ -72,6 +72,19 @@ class SeedsController {
 			next(error);
 		}
 	}
+
+	async delete(request: Request, response: Response, next: NextFunction) {
+		try {
+			console.log("deleting seed");
+			const id = request.params.id;
+
+			await knex<Seed>("seeds").delete().where("id", id);
+
+			return response.status(200).json();
+		} catch (error) {
+			next(error);
+		}
+	}
 }
 
 export { SeedsController };

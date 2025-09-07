@@ -9,6 +9,6 @@ seedsRoutes.get("/", seedsController.index);
 seedsRoutes.get("/:id", seedsController.indexById);
 seedsRoutes.post("/", seedsController.create);
 seedsRoutes.put("/:id", seedsController.update);
-seedsRoutes.delete("/:id", () => console.log("deleting seed: "));
+seedsRoutes.delete("/:id", seedsController.delete);
 
 export { seedsRoutes };
