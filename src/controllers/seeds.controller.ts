@@ -20,7 +20,13 @@ class SeedsController {
 			const id = request.params.id;
 			console.log("indexing seed by id");
 			const seed = await knex<Seed>("seeds").select().where("id", id);
-			return response.status(200).json(seed);
+			if (seed == null || undefined || seed.length == 0) {
+				return response.status(400).json({
+					message: "seed does not exist",
+				});
+			} else {
+				return response.status(200).json(seed);
+			}
 		} catch (error) {
 			next(error);
 		}
@@ -57,17 +63,26 @@ class SeedsController {
 			const { name, mother_id, father_id, collected_date, events } =
 				seedSchema.parse(request.body);
 
-			await knex<Seed>("seeds")
-				.update({
-					mother_id,
-					father_id,
-					collected_date,
-					name,
-					events,
-					updated_at: knex.fn.now(),
-				})
-				.where("id", id);
-			return response.status(200).json();
+			const seed = await knex<Seed>("seeds").select().where("id", id);
+
+			if (seed == null || undefined || seed.length == 0) {
+				return response.status(400).json({
+					message: "seed does not exist",
+				});
+			} else {
+				await knex<Seed>("seeds")
+					.update({
+						mother_id,
+						father_id,
+						collected_date,
+						name,
+						events,
+						updated_at: knex.fn.now(),
+					})
+					.where("id", id);
+
+				return response.status(200).json();
+			}
 		} catch (error) {
 			next(error);
 		}
@@ -77,9 +92,14 @@ class SeedsController {
 		try {
 			console.log("deleting seed");
 			const id = request.params.id;
-
-			await knex<Seed>("seeds").delete().where("id", id);
-
+			const seed = await knex<Seed>("seeds").select().where("id", id);
+			if (seed == null || undefined || seed.length == 0) {
+				return response.status(400).json({
+					message: "seed does not exist",
+				});
+			} else {
+				await knex<Seed>("seeds").delete().where("id", id);
+			}
 			return response.status(200).json();
 		} catch (error) {
 			next(error);
