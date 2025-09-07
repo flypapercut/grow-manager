@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { knexConfig as knex } from "../database/knex";
 import { Seed } from "../models/Seed";
 import { v4 as uuidv4 } from "uuid";
+import { seedSchema } from "../validators/seedSchema";
 
 class SeedsController {
 	async index(request: Request, response: Response, next: NextFunction) {
@@ -17,8 +18,9 @@ class SeedsController {
 	async create(request: Request, response: Response, next: NextFunction) {
 		try {
 			console.log("creating seed");
-			const { events, collected_date, name, mother_id, father_id } =
-				request.body;
+			// const { events } = request.body;
+			const { name, mother_id, father_id, collected_date, events } =
+				seedSchema.parse(request.body);
 
 			const id = uuidv4();
 
