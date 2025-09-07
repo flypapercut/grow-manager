@@ -15,6 +15,17 @@ class SeedsController {
 		}
 	}
 
+	async indexById(request: Request, response: Response, next: NextFunction) {
+		try {
+			const id = request.params.id;
+			console.log("indexing seed by id");
+			const seed = await knex<Seed>("seeds").select().where("id", id);
+			return response.status(200).json(seed);
+		} catch (error) {
+			next(error);
+		}
+	}
+
 	async create(request: Request, response: Response, next: NextFunction) {
 		try {
 			console.log("creating seed");
