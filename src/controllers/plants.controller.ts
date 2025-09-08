@@ -77,6 +77,7 @@ class PlantsController {
 						origin_id,
 						start_date,
 						events: JSON.stringify(events),
+						updated_at: knex.fn.now(),
 					})
 					.where("id", id);
 
