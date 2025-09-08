@@ -10,5 +10,5 @@ export const seedSchema = z.object({
 	mother_id: z.string().optional(),
 	father_id: z.string().optional(),
 	collected_date: z.string().optional(),
-	events: z.json().optional(),
+	events: z.array(z.string()).optional(),
 });
