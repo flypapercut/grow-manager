@@ -47,7 +47,7 @@ class SeedsController {
 				father_id,
 				collected_date,
 				name,
-				events,
+				events: JSON.stringify(events),
 			});
 
 			return response.status(201).json("");
@@ -76,7 +76,7 @@ class SeedsController {
 						father_id,
 						collected_date,
 						name,
-						events,
+						events: JSON.stringify(events),
 						updated_at: knex.fn.now(),
 					})
 					.where("id", id);
